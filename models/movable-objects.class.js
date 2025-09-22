@@ -8,12 +8,6 @@
 
     loadImage(path){
         this.img = new Image();
-        this.img.onload = () => {
-            console.log('Image loaded:', path);
-        };
-        this.img.onerror = () => {
-            console.error('Failed to load image:', path);
-        };
         this.img.src = path;
     }
 
