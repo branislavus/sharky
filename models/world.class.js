@@ -13,7 +13,9 @@ class World {
     character = new Character();
     enemies = [
         new JellyFishYellow(),
+        new JellyFishPurple(),
         new JellyFishYellow(),
+        new JellyFishPurple(),
         new JellyFishYellow(),
     ];
     ctx;
