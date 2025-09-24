@@ -14,6 +14,7 @@ class Character extends MovableObject {
     height = 200;
     width = 200;
     currentImage = 0;
+    world;
 
     constructor() {
         super().loadImage('img/1.Sharkie/3.Swim/1.png');
@@ -22,12 +23,40 @@ class Character extends MovableObject {
     }
 
     animate() {
+
         setInterval(() => {
-            let i = this.currentImage % this.IMAGES_SWIM.length;
-            let path = this.IMAGES_SWIM[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-        },150);
+            if(this.world.keyboard.RIGHT){
+                this.moveRight();
+            }
+        },1000/60)
+
+        setInterval(() => {
+            if(this.world.keyboard.LEFT){
+                this.moveLeft();
+            }
+        },1000/60)
+
+         setInterval(() => {
+            if(this.world.keyboard.UP){
+                this.moveUp();
+            }
+        },1000/60)
+
+         setInterval(() => {
+            if(this.world.keyboard.DOWN){
+                this.moveDown();
+            }
+        },1000/60)
+
+        setInterval(() => {
+            if (this.world.keyboard.RIGHT) {
+                let i = this.currentImage % this.IMAGES_SWIM.length;
+                let path = this.IMAGES_SWIM[i];
+                this.img = this.imageCache[path];
+                this.currentImage++;
+            }
+        }, 150);
     }
+
 
 } 
