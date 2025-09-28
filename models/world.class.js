@@ -30,6 +30,8 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
 
+        this.addObjectsToMap(this.level.sunLights);
+
         this.ctx.translate(-this.camera_x, 0);
 
         requestAnimationFrame(() => {
@@ -56,4 +58,5 @@ class World {
             this.ctx.restore();
         }
     }
+
 }

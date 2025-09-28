@@ -7,7 +7,7 @@ class MovableObject {
     speed = 4;
     imageCache = {};
     otherDirection = false;
-    
+
 
 
 
@@ -36,17 +36,17 @@ class MovableObject {
 
     moveRight() {
         console.log('moving right!');
-   this.x += 1 * this.speed;
+        this.x += 1 * this.speed;
     }
 
     moveLeft() {
         console.log('moving left!');
-    this.x -= 1 * this.speed;
+        this.x -= 1 * this.speed;
     }
 
     moveUp() {
         console.log('moving Up!');
-    this.y -= 1 * this.speed;
+        this.y -= 1 * this.speed;
     }
 
     moveDown() {
@@ -55,5 +55,11 @@ class MovableObject {
     }
 
 
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
 
 }
