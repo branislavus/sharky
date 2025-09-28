@@ -35,22 +35,18 @@ class MovableObject {
     // }
 
     moveRight() {
-        console.log('moving right!');
         this.x += 1 * this.speed;
     }
 
     moveLeft() {
-        console.log('moving left!');
         this.x -= 1 * this.speed;
     }
 
     moveUp() {
-        console.log('moving Up!');
         this.y -= 1 * this.speed;
     }
 
     moveDown() {
-        console.log('moving Down!');
         this.y += 1 * this.speed;
     }
 
@@ -72,4 +68,26 @@ class MovableObject {
         return this.y < 300;
     }
 
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+
+        if (this instanceof Character || this instanceof JellyFishYellow || this instanceof JellyFishPurple || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+
+    }
+
+    isColliding(movObj){
+        return this.x + this.width > movObj.x &&
+               this.y + this.height > movObj.y &&
+               this.x < movObj.x + movObj.width &&
+               this.y < movObj.y + movObj.height;
+    }
 }

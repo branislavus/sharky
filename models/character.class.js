@@ -137,7 +137,7 @@ class Character extends MovableObject {
             else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 150);
+        }, 100);
 
 
     }
