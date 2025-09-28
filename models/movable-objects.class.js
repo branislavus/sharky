@@ -62,4 +62,14 @@ class MovableObject {
         this.currentImage++;
     }
 
+    applyGravity() {
+        setInterval(() => {
+            if (this.isAboveGround()) this.y += 0.5;
+        }, 1000 / 25);
+    }
+
+    isAboveGround() {
+        return this.y < 300;
+    }
+
 }
