@@ -6,6 +6,7 @@ class MovableObject {
     img;
     speed = 4;
     imageCache = {};
+    otherDirection = false;
     
 
 
@@ -35,23 +36,24 @@ class MovableObject {
 
     moveRight() {
         console.log('moving right!');
-         setInterval(() => { this.x += 0.1 * this.speed; }, 1000 / 60);
+   this.x += 1 * this.speed;
     }
 
     moveLeft() {
         console.log('moving left!');
-        setInterval(() => { this.x -= 0.1 * this.speed; }, 1000 / 60);
+    this.x -= 1 * this.speed;
     }
 
     moveUp() {
         console.log('moving Up!');
-         setInterval(() => { this.y -= 0.1 * this.speed; }, 1000 / 60);
+    this.y -= 1 * this.speed;
     }
 
     moveDown() {
         console.log('moving Down!');
-         setInterval(() => { this.y += 0.1 * this.speed; }, 1000 / 60);
+        this.y += 1 * this.speed;
     }
+
 
 
 }

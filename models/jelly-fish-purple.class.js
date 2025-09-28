@@ -8,7 +8,7 @@ class JellyFishPurple extends MovableObject {
 
     img;
     currentImage = 0;
-    speed = 0.1;
+    speed = 0.05;
 
     constructor() {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
@@ -17,12 +17,15 @@ class JellyFishPurple extends MovableObject {
         this.y = Math.random() * 400;
         this.height = 40;
         this.width = 40;
-        this.speed += Math.random() * 4;
+        this.speed += Math.random() * 2;
         this.animate();
     }
 
     animate() {
-        this.moveLeft();
+        setInterval(() => {
+             this.moveLeft(); 
+        }, 1000/60);
+      
 
         setInterval(() => {
             let i = this.currentImage % this.IMAGES_SWIM.length;

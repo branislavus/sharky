@@ -7,7 +7,7 @@ class JellyFishYellow extends MovableObject {
     ]
 
     img;
-    speed = 0.1;
+    speed = 0.05;
     currentImage = 0;
 
     constructor() {
@@ -17,12 +17,15 @@ class JellyFishYellow extends MovableObject {
         this.y = Math.random() * 400;
         this.height = 40;
         this.width = 40;
-        this.speed += Math.random() * 6;
+        this.speed += Math.random() ;
         this.animate();
     }
 
     animate() {
-        this.moveLeft();
+        setInterval(() => {
+            this.moveLeft();
+        }, 1000 / 60);
+
 
         setInterval(() => {
             let i = this.currentImage % this.IMAGES_SWIM.length;

@@ -25,37 +25,34 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if(this.world.keyboard.RIGHT){
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
+                this.otherDirection = false;
             }
-        },1000/60)
-
-        setInterval(() => {
-            if(this.world.keyboard.LEFT){
+            if (this.world.keyboard.LEFT && this.x > - 1000) {
                 this.moveLeft();
+                this.otherDirection = true;
             }
-        },1000/60)
-
-         setInterval(() => {
-            if(this.world.keyboard.UP){
+            if (this.world.keyboard.UP) {
                 this.moveUp();
             }
-        },1000/60)
-
-         setInterval(() => {
-            if(this.world.keyboard.DOWN){
+            if (this.world.keyboard.DOWN) {
                 this.moveDown();
             }
-        },1000/60)
+            this.world.camera_x = -this.x + 100; //character position
+        }, 1000 / 60)
+
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 let i = this.currentImage % this.IMAGES_SWIM.length;
                 let path = this.IMAGES_SWIM[i];
                 this.img = this.imageCache[path];
                 this.currentImage++;
             }
         }, 150);
+
+
     }
 
 

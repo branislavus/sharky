@@ -1,26 +1,11 @@
 class World {
 
-    backgroundObjects = [
-        new BackgroundObject('img/3. Background/Legacy/Layers/5. Water/L1.png', 0, 0),
-        new BackgroundObject('img/3. Background/Legacy/Layers/5. Water/L2.png', 720, 0),
-        new BackgroundObject('img/3. Background/Legacy/Layers/4.Fondo 2/L1.png', 0, 0),
-        new BackgroundObject('img/3. Background/Legacy/Layers/4.Fondo 2/L2.png', 720, 0),
-        new BackgroundObject('img/3. Background/Legacy/Layers/3.Fondo 1/L1.png', 0, 0),
-        new BackgroundObject('img/3. Background/Legacy/Layers/3.Fondo 1/L2.png', 720, 0),
-        new BackgroundObject('img/3. Background/Legacy/Layers/2. Floor/L1.png', 0, 0),
-        new BackgroundObject('img/3. Background/Legacy/Layers/2. Floor/L2.png', 720, 0),
-    ];
     character = new Character();
-    enemies = [
-        new JellyFishYellow(),
-        new JellyFishPurple(),
-        new JellyFishYellow(),
-        new JellyFishPurple(),
-        new JellyFishYellow(),
-    ];
+    level = level1;
     canvas;
     ctx;
     keyboard;
+    camera_x = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -38,11 +23,14 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToMap(this.backgroundObjects);
+        this.addObjectsToMap(this.level.backgroundObjects);
+
         this.addToMap(this.character);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.enemies);
 
+        this.ctx.translate(-this.camera_x, 0);
 
         requestAnimationFrame(() => {
             this.draw();
@@ -56,6 +44,16 @@ class World {
     }
 
     addToMap(moveObj) {
+        if (moveObj.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(moveObj.width, 0);
+            this.ctx.scale(-1, 1);
+            moveObj.x = moveObj.x * -1;
+        }
         this.ctx.drawImage(moveObj.img, moveObj.x, moveObj.y, moveObj.width, moveObj.height);
+        if (moveObj.otherDirection) {
+            moveObj.x = moveObj.x * -1;
+            this.ctx.restore();
+        }
     }
 }
