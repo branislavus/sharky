@@ -1,6 +1,7 @@
 class World {
 
     character = new Character();
+    statusbarHealth = new StatusbarHealth();
     level = level1;
     canvas;
     ctx;
@@ -25,6 +26,8 @@ checkCollisions(){
         this.level.enemies.forEach((enemy)=> {
            if(this.character.isColliding(enemy)){
             console.log('collision with: ', enemy );
+                this.character.hit();
+            console.log('collision energy: ', this.character.energy);
             
            }
         });
@@ -41,6 +44,7 @@ checkCollisions(){
         this.addObjectsToMap(this.level.enemies);
 
         this.addObjectsToMap(this.level.sunLights);
+        this.addToMap(this.statusbarHealth);
 
         this.ctx.translate(-this.camera_x, 0);
 

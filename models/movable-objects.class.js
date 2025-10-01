@@ -1,38 +1,26 @@
-class MovableObject {
-    x;
-    y;
-    height;
-    width;
-    img;
+class MovableObject extends DrawableObject{
+
     speed = 4;
-    imageCache = {};
     otherDirection = false;
+    energy = 100;
+    isDead = false;
+    lastHit = 0;
 
 
 
+   
 
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
+    drawFrame(ctx) {
+
+        if (this instanceof Character || this instanceof JellyFishYellow || this instanceof JellyFishPurple || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+
     }
-
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
-
-    // animate(element) {
-    //     setInterval(() => {
-    //         let i = this.currentImage % element.length;
-    //         let path = element[i];
-    //         this.img = this.imageCache[path];
-    //         this.currentImage++;
-    //     }, 1000);
-    // }
 
     moveRight() {
         this.x += 1 * this.speed;
@@ -58,6 +46,7 @@ class MovableObject {
         this.currentImage++;
     }
 
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround()) this.y += 0.5;
@@ -68,26 +57,31 @@ class MovableObject {
         return this.y < 300;
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
 
-    drawFrame(ctx) {
-
-        if (this instanceof Character || this instanceof JellyFishYellow || this instanceof JellyFishPurple || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-
-    }
-
-    isColliding(movObj){
+    isColliding(movObj) {
         return this.x + this.width > movObj.x &&
-               this.y + this.height > movObj.y &&
-               this.x < movObj.x + movObj.width &&
-               this.y < movObj.y + movObj.height;
+            this.y + this.height > movObj.y &&
+            this.x < movObj.x + movObj.width &&
+            this.y < movObj.y + movObj.height;
+    }
+
+    isCharacterDead() {
+        return this.energy == 0;
+    }
+
+    hit() {
+        this.energy -= 5;
+        this.isHurt();
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit;
+        timePassed = timePassed / 1000;
+        return timePassed < 1;
     }
 }
