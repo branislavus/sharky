@@ -1,11 +1,11 @@
 class StatusbarHealth extends MovableObject {
     IMAGES_HEALTH = [
-        'img/4. Marcadores/orange/0_  copia.png',
-        'img/4. Marcadores/orange/20_ copia 2.png',
-        'img/4. Marcadores/orange/40_  copia.png',
-        'img/4. Marcadores/orange/60_  copia.png',
-        'img/4. Marcadores/orange/80_  copia.png',
-        'img/4. Marcadores/orange/100_  copia.png',
+        'img/4. Marcadores/Purple/0_ .png',
+        'img/4. Marcadores/Purple/20__1.png',
+        'img/4. Marcadores/Purple/40_ .png',
+        'img/4. Marcadores/Purple/60_ .png',
+        'img/4. Marcadores/Purple/80_ .png',
+        'img/4. Marcadores/Purple/100_ .png',
     ]
 
     img;
@@ -17,14 +17,17 @@ class StatusbarHealth extends MovableObject {
 
     constructor() {
         super();
-        this.loadImage('img/4. Marcadores/orange/100_  copia.png');
         this.loadImages(this.IMAGES_HEALTH);
+        this.setPercentage(100);
     }
 
     setPercentage(percentage) {
         this.percentage = percentage;
-
-        //to be continued ----->
+        console.log('this.percentage :', this.percentage);
+        let path = this.IMAGES_HEALTH[this.resolvePercentageIndex()];
+        console.log('path :', path);
+        
+        this.img = this.imageCache[path];
     }
 
     resolvePercentageIndex() {
@@ -38,7 +41,7 @@ class StatusbarHealth extends MovableObject {
             return 2;
         } else if (this.percentage > 20) {
             return 1;
-        } else (this.percentage > 0){
+        } else {
             return 0;
         }
 

@@ -1,26 +1,16 @@
-class MovableObject extends DrawableObject{
+class MovableObject extends DrawableObject {
 
     speed = 4;
     otherDirection = false;
     energy = 100;
     isDead = false;
     lastHit = 0;
+    bubbleMove = 0.001;
 
 
 
-   
 
-    drawFrame(ctx) {
 
-        if (this instanceof Character || this instanceof JellyFishYellow || this instanceof JellyFishPurple || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-
-    }
 
     moveRight() {
         this.x += 1 * this.speed;
@@ -50,6 +40,25 @@ class MovableObject extends DrawableObject{
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround()) this.y += 0.5;
+        }, 1000 / 25);
+    }
+
+    applyLigthMaterials() {
+        setInterval(() => {
+            this.bubbleMove += 0.05;
+            
+            if (this.bubbleMove < 1) {
+                // Anfangs: Nach unten fallen (kurz)
+                this.y += this.bubbleMove;
+            } else {
+                // Dann: Nach oben steigen
+                this.y -= (this.bubbleMove - 1.5);
+            }
+            
+            // Optional: Max Speed begrenzen
+            if (this.bubbleMove > 4) {
+                this.bubbleMove = 4;
+            }
         }, 1000 / 25);
     }
 

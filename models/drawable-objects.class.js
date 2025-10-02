@@ -1,12 +1,12 @@
 class DrawableObject {
-        x;
+    x;
     y;
     height;
     width;
     img;
-     imageCache = {};
+    imageCache = {};
 
-      loadImage(path) {
+    loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
@@ -21,5 +21,17 @@ class DrawableObject {
 
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+
+        if (this instanceof Character || this instanceof JellyFishYellow || this instanceof JellyFishPurple || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+
     }
 }
