@@ -30,7 +30,7 @@ const level1 = new Level(
     [
         new JellyFishYellow(),
         new JellyFishPurple(),
-        new JellyFishYellow(),
+        new PufferFish(),
         new JellyFishPurple(),
         new JellyFishYellow(),
         new Endboss(),

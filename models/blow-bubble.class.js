@@ -11,7 +11,7 @@ class BlowBubble extends MovableObject {
 
 
     blow(){
-        this.speedY = 10;d
+        this.speedY = 10;
         this.applyLigthMaterials();
         setInterval(() => {
             this.x += 5;

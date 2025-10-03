@@ -8,6 +8,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    isCollidingWith = "";
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -32,9 +33,11 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                console.log('collision with: ', enemy);
+                this.isCollidingWith = enemy;
+                console.log('this.isCollidingWith = enemy: ', enemy);
+                
                 this.character.hit();
-                console.log('collision energy: ', this.character.energy);
+                // console.log('collision energy: ', this.character.energy);
                 this.statusbarHealth.setPercentage(this.character.energy);
             }
         });

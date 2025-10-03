@@ -5,19 +5,17 @@ class MovableObject extends DrawableObject {
     energy = 100;
     isDead = false;
     lastHit = 0;
-    bubbleMove = 0.001;
-
-
-
-
+    bubbleMove = 0;
 
 
     moveRight() {
         this.x += 1 * this.speed;
+        this.otherDirection = false;
     }
 
     moveLeft() {
         this.x -= 1 * this.speed;
+        this.otherDirection = true;
     }
 
     moveUp() {
@@ -46,16 +44,11 @@ class MovableObject extends DrawableObject {
     applyLigthMaterials() {
         setInterval(() => {
             this.bubbleMove += 0.05;
-            
             if (this.bubbleMove < 1) {
-                // Anfangs: Nach unten fallen (kurz)
                 this.y += this.bubbleMove;
             } else {
-                // Dann: Nach oben steigen
                 this.y -= (this.bubbleMove - 1.5);
             }
-            
-            // Optional: Max Speed begrenzen
             if (this.bubbleMove > 4) {
                 this.bubbleMove = 4;
             }
